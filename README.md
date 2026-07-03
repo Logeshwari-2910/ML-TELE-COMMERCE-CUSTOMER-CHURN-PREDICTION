@@ -1,6 +1,6 @@
 # Customer Churn Predictor
 
-A machine learning project that predicts telecom customer churn using supervised learning techniques. The project includes data preprocessing, model comparison, hyperparameter tuning, and churn prediction using multiple classification algorithms.
+A machine learning project for predicting telecom customer churn using supervised learning algorithms. The project includes data preprocessing, class imbalance handling, dimensionality reduction, model comparison, hyperparameter tuning, ensemble learning, and prediction on new customer data.
 
 ---
 
@@ -13,28 +13,51 @@ A machine learning project that predicts telecom customer churn using supervised
 - XGBoost
 - Matplotlib
 - Seaborn
+- imbalanced-learn (SMOTE)
 - Google Colab
+
+---
+
+## Repository Structure
+
+```
+Customer-Churn-Predictor/
+│── Tele-Commerce-Customer-Churn-Prediction.ipynb
+│── WA_Fn-UseC_-Telco-Customer-Churn.csv
+│── README.md
+```
 
 ---
 
 ## Dataset
 
-This project uses the **IBM Telco Customer Churn** dataset containing **7,043 customer records**. The dataset includes customer demographics, account information, subscribed services, and churn status.
+**Dataset:** `WA_Fn-UseC_-Telco-Customer-Churn.csv`
+
+The dataset contains **7,043** telecom customer records with demographic details, subscribed services, account information, and churn status.
+
+Target Variable:
+- **Churn**
+  - 0 – No Churn
+  - 1 – Churn
 
 ---
 
 ## Project Workflow
 
-### Data Preprocessing
-- Removed unnecessary columns.
-- Handled missing values.
-- Applied label encoding to categorical features.
-- Performed feature scaling using `StandardScaler`.
-- Balanced the dataset using **SMOTE**.
-- Reduced dimensionality using **Principal Component Analysis (PCA)**.
+### 1. Data Preprocessing
 
-### Model Training
-The following classification algorithms were trained and evaluated:
+- Removed unnecessary features
+- Handled missing values
+- Label encoded categorical variables
+- Standardized numerical features using StandardScaler
+- Balanced the dataset using SMOTE
+- Applied Principal Component Analysis (PCA) for dimensionality reduction
+
+---
+
+### 2. Model Training
+
+The following machine learning models were trained and evaluated:
 
 - Logistic Regression
 - Random Forest
@@ -42,89 +65,104 @@ The following classification algorithms were trained and evaluated:
 - K-Nearest Neighbors (KNN)
 - XGBoost
 
-Model performance was compared before and after applying SMOTE.
+Models were compared before and after hyperparameter tuning using:
 
-### Hyperparameter Tuning
-Optimized model performance using:
+- Accuracy
+- Precision
+- Recall
+- F1-Score
+
+---
+
+### 3. Hyperparameter Tuning
+
+Model performance was optimized using:
 
 - GridSearchCV
 - RandomizedSearchCV
 
----
-
-## Project Structure
-
-```
-Tele-Commerce-Customer-Churn-Prediction.ipynb
-README.md
-dataset.csv
-```
+Best parameters were selected for each model before final evaluation.
 
 ---
 
-## Getting Started
+### 4. Ensemble Learning
 
-### Clone the repository
+The optimized models were further evaluated using ensemble techniques:
+
+- Bagging
+- Boosting (XGBoost)
+- Stacking
+- Soft Voting
+
+Performance was compared using:
+
+- Accuracy
+- Precision
+- Recall
+- F1-Score
+- Confusion Matrix
+
+Boosting (XGBoost) achieved the best overall performance among the ensemble methods.
+
+---
+
+### 5. Model Serialization
+
+The trained model and preprocessing components were saved using **Pickle**, including:
+
+- XGBoost model
+- StandardScaler
+- PCA transformer
+- Label Encoders
+
+---
+
+### 6. Prediction
+
+The saved model was loaded to predict churn for new customer data after applying the same preprocessing steps:
+
+- Label Encoding
+- Feature Scaling
+- PCA Transformation
+
+The model outputs:
+
+- Churn Prediction
+- Prediction Probability
+
+---
+
+## Features
+
+- Data preprocessing
+- Feature engineering
+- Class imbalance handling using SMOTE
+- PCA for dimensionality reduction
+- Comparison of five machine learning models
+- Hyperparameter tuning
+- Ensemble learning
+- Confusion matrix visualization
+- Model serialization using Pickle
+- Prediction on new customer data
+
+---
+
+## How to Run
+
+Clone the repository.
 
 ```bash
 git clone https://github.com/Logeshwari-2910/Customer-Churn-Predictor.git
 cd Customer-Churn-Predictor
 ```
 
-### Install dependencies
+Install dependencies.
 
 ```bash
-pip install pandas numpy scikit-learn xgboost matplotlib seaborn imbalanced-learn
+pip install pandas numpy matplotlib seaborn scikit-learn xgboost imbalanced-learn
 ```
 
----
-
-## Running the Project
-
-Open the notebook in **Google Colab** or **Jupyter Notebook**.
-
-If using Google Colab, upload the dataset:
-
-```python
-from google.colab import files
-uploaded = files.upload()
-```
-
-Then load the dataset:
-
-```python
-import pandas as pd
-
-df = pd.read_csv("your_dataset.csv")
-```
-
-Alternatively, mount Google Drive:
-
-```python
-from google.colab import drive
-drive.mount('/content/drive')
-
-df = pd.read_csv('/content/drive/MyDrive/path/to/dataset.csv')
-```
-
----
-
-## Features
-
-- Data preprocessing and visualization
-- Class imbalance handling using SMOTE
-- Feature scaling and dimensionality reduction
-- Comparison of multiple machine learning models
-- Hyperparameter tuning
-- Customer churn prediction
-
----
-
-## Future Improvements
-
-- Deploy the trained model as a web application using FastAPI or Flask.
-- Build an interactive dashboard for churn prediction.
-- Perform feature importance analysis and model explainability using SHAP.
+Open **Tele-Commerce-Customer-Churn-Prediction.ipynb** using Google Colab or Jupyter Notebook and run all cells.
 
 ---
 
